@@ -1,0 +1,25 @@
+Things to research:
+
+How to keep the paddle on same X axis
+Bouncing ball off paddle acting like it starts up again in semi-circle
+Collision check, if edges overlap
+
+
+
+Code:
+Need to generate on load the blocks
+Divs, with different colors
+Lay out blocks in a grid
+Create ball
+Create paddle
+Bounce around, bounce tutorial
+Ball position continuously changing based on a function
+Load different backgrounds on start, array of 4
+
+
+Where the blocks will start:
+	top left corner, increment per size of the block
+	move down a row after top row is filled
+	do this by nested for loop
+
+Collision with rectangle is hard
