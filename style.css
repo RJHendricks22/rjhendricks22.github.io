@@ -8,6 +8,8 @@ canvas {
   width: 1200px;
   margin: 0 auto;
   background-color: black;
+  box-shadow: 10px 10px 5px black;
+  cursor: none;
 }
 .block {
   width: 60px;
@@ -15,4 +17,11 @@ canvas {
   color: white;
   background-color: white;
   z-index: 5;
+}
+
+#win {
+  margin-left: 19%;
+  display: inline-block;
+  text-align: center;
+  font-family: sans-serif;
 }
