@@ -1,8 +1,5 @@
 
-//  console.log('ready!')
-
 let container = document.getElementById('playfield');
-
 let gameBoard = container.getContext('2d');
 let width = container.width = 1200;
 let height = container.height = 850;
@@ -27,8 +24,8 @@ function Blocks (posx, posy) {
 function Ball () {
   this.x = 600;
   this.y = 800;
-  this.velX = 4;
-  this.velY = -4;
+  this.velX = 4.5;
+  this.velY = -4.5;
   this.color = 'white';
   this.size = 10;
 };
@@ -41,7 +38,7 @@ function Paddle () {
   this.sizeYp = 10
 }
 
-//Creating the ball, will alter later for single ball on startup
+//Creating the ball, will alter later for single ball on startup, this is based off of the Bouncing Balls tutorial from mozilla since we haven't really used canvases but this is what i needed for the game.  link: https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_building_practice
 Ball.prototype.draw = function () {
   gameBoard.beginPath();
   gameBoard.fillStyle = this.color;
@@ -68,7 +65,7 @@ Paddle.prototype.draw = function () {
   gameBoard.stroke();
   gameBoard.fill();
 }
-//Draw the score
+//Declare score and draw it
 let score = 0;
 let drawScore = function () {
   gameBoard.beginPath();
@@ -76,15 +73,21 @@ let drawScore = function () {
   gameBoard.fillStyle = 'white';
   gameBoard.fillText('Score: '+score, 25, 25)
 }
-//Draw the lives counter
+//Declare lives variable and draw the lives counter
 let lives = 3;
 let drawLives = function () {
   gameBoard.fillText('Lives: '+lives, 175, 25)
 }
+//Draw the congrats for winning
 let drawWin = function() {
   gameBoard.font = '50px Sans-serif';
   gameBoard.fillStyle = 'rgb('+random(50,220)+','+random(0,220)+','+random(0,220)+')';
   gameBoard.fillText('Congratulations, You Win!', 315, 400);
+}
+//Draw the game over for losing
+let drawLose = function () {
+  gameBoard.font = '50px Sans-serif';
+  gameBoard.fillText('Game over, Refresh to play again', 220, 500)
 }
 
 //Function for moving the paddle with the cursor, this we haven't learned so i looked up how to do it
@@ -98,8 +101,10 @@ function mouseMoveHandler(e) {
   }
 }
 
-//Counter for lives left
-//Collision detection for the ball
+//Declaring the force variable to be used in paddle bouncing physics
+let force;
+
+//Collision detection for the ball... first off the walls, then the paddle, then the blocks.
 Ball.prototype.update = function () {
   // bounce from the right side
   if ((this.x + this.size) >= width) {
@@ -113,7 +118,7 @@ Ball.prototype.update = function () {
   if ((this.y - this.size) <= 0) {
     this.velY = increaseSpeed(this.velY);
   }
-  //bounce from the bottom, pops the balls array to lose a life
+  //detection from the bottom, pops the balls array, subtracts a life, and alerts user they lost a life or lost if no lives left, also draws gameover 
   if ((this.y - this.size) >= height) {
     balls.pop();
     lives--;
@@ -121,19 +126,25 @@ Ball.prototype.update = function () {
       alert('you lost a life!, you have '+lives+' lives left!')
       balls.push(new Ball);  
     } else {
+      drawLives();
+      drawScore();
+      drawLose();
       alert('You Lost all lives, Game Over!')
     }
   }
   //Paddle Bounce here!
   if ((this.y + this.size) >= paddles[0].yP){
     if ((this.x + this.size) >= paddles[0].xP && (this.x - this.size) <= (paddles[0].xP + paddles[0].sizeXp)) {
-      this.velX = (vectorsX(this.velX, this.velY));
-      this.velY = -(vectorsY(this.velX, this.velY));
+      //trial and error led me to pull out the force calculation because leaving it in the vector function was giving incorrect values
+      force = Math.sqrt((this.velX * this.velX) + (this.velY * this.velY))
+      this.velX = -(vectorsX(force));
+      this.velY = -(vectorsY(force));
     }
     // Bounce from side of paddle
      else if ((this.x + this.size) === paddles[0].yP && (this.y+this.size) < (paddles[0].yP + paddles[0].sizeYp) && (this.y) > paddles[0].yP) {
-      this.velX = (vectorsX(this.velX, this.velY));
-      this.velY = -(vectorsY(this.velX, this.velY));
+      force = Math.sqrt((this.velX * this.velX) + (this.velY * this.velY));
+      this.velX = -(vectorsX(force));
+      this.velY = -(vectorsY(force));
     }
   }
 
@@ -143,7 +154,6 @@ Ball.prototype.update = function () {
   
   // COLLISION DETECTION TIME
   Ball.prototype.collisionDetect = function () {
-//    console.log('Starting coll detect: ' + blocks.length)
     for (let i=0; i < blocks.length; i++) {
 
       //this statement checks if the ball is within the x coordinate range that block[i] inhabits
@@ -187,16 +197,15 @@ function increaseSpeed (vel) {
   }
 }
 
-//function for the math behind the x vector curved deflection of the paddle
-function vectorsX(velx, vely) {
-  let newx = velx * Math.cos((balls[0].x - paddles[0].xP)/40 * Math.PI) 
-  console.log(newx)
-  return newx
+//function for the math behind the x vector curved deflection of the paddle, that i can't believe i remember trig to do!
+function vectorsX(f) {
+  let newx = f * Math.cos((balls[0].x + 15 - paddles[0].xP)/230 * Math.PI);
+  return newx;
 }
 //2nd function for y vector in curved deflection
-function vectorsY(velx, vely) {
-  let newy = vely * Math.sin((balls[0].x - paddles[0].xP)/40 * Math.PI) 
-  return newy
+function vectorsY(f) {
+  let newy = f * Math.sin((balls[0].x + 15 - paddles[0].xP)/230 * Math.PI);
+  return newy;
 }
 //declaring the empty arrays
 let paddles = [];
@@ -244,19 +253,19 @@ function loop () {
   balls[0].collisionDetect();
   drawScore();
   drawLives();
-    //this constantly runs the animation function
+  
   if (blocks.length > 0) {
     requestAnimationFrame(loop);
   } else {
     requestAnimationFrame(loop);
     drawWin();
+    //on win i set it to just bounce around the canvas without dying
     if ((balls[0].y + balls[0].size) >= height) {
       balls[0].velY = increaseSpeed(balls[0].velY)
     }
   }
 }
 loop();
-//console.log(blocks.length)
 
 
 
