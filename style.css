@@ -7,7 +7,7 @@ canvas {
   height: 900px;
   width: 1200px;
   margin: 0 auto;
-  background-color: black;
+  background-image: url(blockbkgrd.jpg);
   box-shadow: 10px 10px 5px black;
   cursor: none;
 }
@@ -24,4 +24,20 @@ canvas {
   display: inline-block;
   text-align: center;
   font-family: sans-serif;
+}
+form {
+  margin: 0 auto;
+  text-align: center;
+  padding-bottom: 20px;
+  font-family: sans-serif;
+  font-size: 30px;
+  color: rgba(0,0,0,.8);
+  text-shadow: 2px 2px 5px darkslategray;
+}
+button {
+  font-size: 20px;
+  padding: 8px;
+  margin-left: 50px;
+  border-radius: 5px;
+  background-color: slategray;
 }

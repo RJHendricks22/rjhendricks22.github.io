@@ -23,3 +23,25 @@ Where the blocks will start:
 	do this by nested for loop
 
 Collision with rectangle is hard
+
+//COLLISION DETECTION WITH BRYAN
+ // function checkCollision (){
+ //    let rock =$("<img id='rock1' src='rockface.png'>");
+ //    // Determine the x coordinate of obj1
+ //    rock_position = rock.offset();
+ //    rock_x = rock_position.left;
+ //
+ //    // Determine the x coordinate of obj2
+ //    raft_position = raft.offset();
+ //    raft_x = raft_position.left;
+ //
+ //    // Determine the widths
+ //    rock_width = rock.width();
+ //    raft_width = raft.width();
+ //
+ //    if(rock_x + rock_width > raft_x && raft_x + raft_width > rock_x){
+ //     alert (collided);
+ //   } else {
+ //     return false;
+ //   }
+ // }
