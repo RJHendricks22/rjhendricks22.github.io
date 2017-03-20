@@ -7,9 +7,13 @@ canvas {
   height: 900px;
   width: 1200px;
   margin: 0 auto;
-  background-image: url(blockbkgrd.jpg);
+  background-image: url(blockbkgrd.png);
   box-shadow: 10px 10px 5px black;
   cursor: none;
+}
+#heading {
+  margin-left: 10%;
+  font-family: sans-serif
 }
 .block {
   width: 60px;
@@ -19,12 +23,6 @@ canvas {
   z-index: 5;
 }
 
-#win {
-  margin-left: 19%;
-  display: inline-block;
-  text-align: center;
-  font-family: sans-serif;
-}
 form {
   margin: 0 auto;
   text-align: center;
@@ -32,7 +30,7 @@ form {
   font-family: sans-serif;
   font-size: 30px;
   color: rgba(0,0,0,.8);
-  text-shadow: 2px 2px 5px darkslategray;
+  text-shadow: 1px 1px 4px darkslategray;
 }
 button {
   font-size: 20px;
@@ -40,4 +38,30 @@ button {
   margin-left: 50px;
   border-radius: 5px;
   background-color: slategray;
+}
+ol {
+  font-family: sans-serif;
+  font-size: 20px;
+}
+h3 {
+  font-family: sans-serif;
+  font-size: 30px;
+}
+#instructions {
+  display: inline-block;
+  border: 2px solid black;
+  margin-left: 14%;
+  margin-top: 80px;
+  padding: 0px 20px 20px 20px;
+  background-color: rgb(239,158,45);
+  box-shadow: 5px 5px 10px black;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+p {
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 30px;
 }

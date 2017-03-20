@@ -8,24 +8,35 @@
 </head>
 
 <body>
-  <h1>HELLO</h1>
+  <div id="heading">
+    <h1>BRICK BREAKER V1.0</h1>
+    <h2>A JS game by Ray Hendricks</h2>
+  </div>
+  
   <hr/>
-  <h1 id="win"></h1>
   <form id="form">
-    <h3>Choose your difficulty: </h3>
+    <h3><a href="#instructions">INSTRUCTIONS</a></h3>
+    <h3>CHOOSE YOUR DIFFICULTY: </h3>
     <button id="demo" type="button" value="0">Demo</button>
     <button id="easy" type="button" value="1">Easy</button>
     <button id="medium" type="button" value="2">Medium</button>
     <button id="hard" type="button" value="3">Hard</button>
   </form>
-<!--    <div class="block"></div>-->
   <canvas id="playfield">
   </canvas>
-  <div>
-    <h2>Made by Ray Hendricks</h2>
-  </div>
 
 
+<div id="instructions">
+  <h3>Instructions:</h3>
+  <ol>
+    <li> Choose the desired difficulty, Easy, Medium or Hard</li>
+    <li> Mouse over the game window and the paddle will move with your mouse</li>
+    <li> Keep the ball from falling below the paddle, and break all the blocks to win!</li>
+    <li> The ball starts moving faster over time, so watch out!</li>
+  </ol>
+  <p><a href="https://github.com/RJHendricks22/rjhendricks22.github.io">My Github</a></p>
+</div>
+  
 </body>
   <script src="main.js"></script>
 
