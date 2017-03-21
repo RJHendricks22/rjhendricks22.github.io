@@ -13,7 +13,7 @@ function game(obj) {
   let container = document.getElementById('playfield');
   let gameBoard = container.getContext('2d');
   let width = container.width = 1200;
-  let height = container.height = 850;
+  let height = container.height = 700;
 
   // using random a lot, so utilizing this function instead of retyping all the time
   function random (min, max) {
@@ -34,7 +34,7 @@ function game(obj) {
   // Time to model the balls
   function Ball () {
     this.x = 600;
-    this.y = 800;
+    this.y = 650;
     this.velX = 4.5;
     this.velY = -4.5;
     this.color = 'white';
@@ -44,7 +44,7 @@ function game(obj) {
   // this models the paddle
   function Paddle () {
     this.xP = 500
-    this.yP = 830
+    this.yP = 680
     this.color = 'lightblue';
     this.sizeXp = 200
     this.sizeYp = 10
